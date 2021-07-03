@@ -17,10 +17,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Custom python module
-# from data_pipeline.scraper.dircreator import DirCreator
-# from data_pipeline.scraper.preproccessing import PreProcessing
-from dirmanager import DirManager
-from preproccessing import PreProcessing
+#from data_pipeline.scraper.dirmanager import DirManager
+#from data_pipeline.scraper.preproccessing import PreProcessing
+from scraper.dirmanager import DirManager
+from scraper.preproccessing import PreProcessing
 
 
 class SjcWebsite:
