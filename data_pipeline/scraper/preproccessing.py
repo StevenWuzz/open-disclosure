@@ -2,7 +2,7 @@ import xlrd
 import csv
 import glob
 
-from os import path, pardir, listdir, devnull, name
+from os import path, pardir, listdir, devnull, name, rename, remove
 from sys import getsizeof
 import json
 import pandas as pd
@@ -10,7 +10,7 @@ import xlrd
 from time import sleep
 
 # Custom python module
-from dirmanager import DirManager
+from scraper.dirmanager import DirManager
 
 FILE_DIVIDER = '\\' if name == 'nt' else '/'
 
@@ -67,6 +67,7 @@ class PreProcessing():
         ballotItemHeader = "Ballot Item"
 
         print(filenames)
+
         for fullfilepathname in filenames[-numDownloads:]:
             filename = path.basename(fullfilepathname)
             print(filename)
@@ -84,11 +85,12 @@ class PreProcessing():
             data.insert(0, ballotItemHeader, BallotItem)
 
             data.to_excel('{}/{}'.format(new_folder, filename), index=False)
+
     
     def insertColumnsHelper(self):
         partial_download = True
         filenames = sorted([self.download_dir + FILE_DIVIDER + f for f in listdir(self.download_dir)], key=path.getmtime)
-
+        
         while partial_download:
             filename = path.basename(filenames[-1])
             print(filename)
